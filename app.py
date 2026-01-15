@@ -24,13 +24,13 @@ if "grades" not in st.session_state:
 st.subheader("Избери любими неща")
 
 # Избори
-color = st.selectbox("Любим цвят:", list(st.session_state.students.keys()))
-sport = st.selectbox("Любим спорт:", list(st.session_state.grades.keys()))
+students = st.selectbox("Ученик:", list(st.session_state.students.keys()))
+grades = st.selectbox("Оценка:", list(st.session_state.grades.keys()))
 
 # Бутон за запис
 if st.button("Запази избора"):
     st.session_state.students[students] += 1
-    st.session_state.grades[grade] += 1
+    st.session_state.grades[grades] += 1
     st.success("Изборът е записан!")
 
 st.divider()
@@ -46,6 +46,6 @@ st.bar_chart(students_df)
 # Графика за спортовете
 st.write("Оценка")
 sports_df = pd.DataFrame.from_dict(
-    st.session_state.grade, orient="index", columns=["Брой"]
+    st.session_state.grades, orient="index", columns=["Брой"]
 )
-st.bar_chart(grade_df)
+st.bar_chart(grades_df)
