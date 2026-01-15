@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Ученици и оценки")
+st.title("Ученици, оценки и клас")
 
 
 if "students" not in st.session_state:
