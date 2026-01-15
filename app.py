@@ -21,15 +21,26 @@ if "grades" not in st.session_state:
         "2": 0
     }
 
-st.subheader("Избери любими неща")
+if "class" not in st.session_state:
+    st.session_state.class = {
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0
+    }
+
+st.subheader("Въведи ученик, клас и оценка")
 
 
 students = st.selectbox("Ученик:", list(st.session_state.students.keys()))
 grades = st.selectbox("Оценка:", list(st.session_state.grades.keys()))
+class = st.selectbox("Клас:", list(st.session_state.class.keys()))
 
 if st.button("Запази избора"):
     st.session_state.students[students] += 1
     st.session_state.grades[grades] += 1
+    st.session_state.class[class] += 1
     st.success("Изборът е записан!")
 
 st.divider()
@@ -48,3 +59,9 @@ grades_df = pd.DataFrame.from_dict(
     st.session_state.grades, orient="index", columns=["Брой"]
 )
 st.bar_chart(grades_df)
+
+st.write("Клас")
+class_df = pd.DataFrame.form_dict(
+    st.session_state.class, orient="index", columns["Брой"]
+)
+st.bar_chart(class_df)
