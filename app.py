@@ -1,50 +1,51 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Любими неща – класна анкета")
+st.title("Ученици и оценки")
 
 # Инициализация на session_state
-if "colors" not in st.session_state:
-    st.session_state.colors = {
-        "Червен": 0,
-        "Син": 0,
-        "Зелен": 0,
-        "Жълт": 0
+if "students" not in st.session_state:
+    st.session_state.students = {
+        "Петър": 0,
+        "Георги": 0,
+        "Димитър": 0,
+        "Иван": 0
     }
 
-if "sports" not in st.session_state:
-    st.session_state.sports = {
-        "Футбол": 0,
-        "Баскетбол": 0,
-        "Волейбол": 0,
-        "Плуване": 0
+if "grades" not in st.session_state:
+    st.session_state.grades = {
+        "6": 0,
+        "5": 0,
+        "4": 0,
+        "3": 0,
+        "2": 0
     }
 
 st.subheader("Избери любими неща")
 
 # Избори
-color = st.selectbox("Любим цвят:", list(st.session_state.colors.keys()))
-sport = st.selectbox("Любим спорт:", list(st.session_state.sports.keys()))
+color = st.selectbox("Любим цвят:", list(st.session_state.students.keys()))
+sport = st.selectbox("Любим спорт:", list(st.session_state.grades.keys()))
 
 # Бутон за запис
 if st.button("Запази избора"):
-    st.session_state.colors[color] += 1
-    st.session_state.sports[sport] += 1
+    st.session_state.students[students] += 1
+    st.session_state.grades[grade] += 1
     st.success("Изборът е записан!")
 
 st.divider()
 st.subheader("Резултати")
 
 # Графика за цветовете
-st.write("Любими цветове")
-colors_df = pd.DataFrame.from_dict(
-    st.session_state.colors, orient="index", columns=["Брой"]
+st.write("Ученик")
+students_df = pd.DataFrame.from_dict(
+    st.session_state.students, orient="index", columns=["Брой"]
 )
-st.bar_chart(colors_df)
+st.bar_chart(students_df)
 
 # Графика за спортовете
-st.write("Любими спортове")
+st.write("Оценка")
 sports_df = pd.DataFrame.from_dict(
-    st.session_state.sports, orient="index", columns=["Брой"]
+    st.session_state.grade, orient="index", columns=["Брой"]
 )
-st.bar_chart(sports_df)
+st.bar_chart(grade_df)
